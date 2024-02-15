@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import JoblyApi from "../api/api";
 import SearchForm from "../common/SearchForm";
+import CompanyCard from "./CompanyCard";
 
 /** Display a list of all the companies, with a preview description of company. 
  *  
@@ -41,14 +42,16 @@ function CompanyList() {
             <SearchForm searchFor={search}/>
             {companies !== null ? (
                 <div className="companyList-cards">
-                    <ul>
                         {companies.map(c => (
-                            <li>
-                                {c.name}
-                                <p>{c.description}</p>
-                            </li>
+                            <CompanyCard 
+                                id={c.handle}
+                                handle={c.handle}
+                                name={c.name}
+                                logoUrl={c.logoUrl}
+                                description={c.description}
+                            />
+                                
                         ))}
-                    </ul>
                 </div>
             ) : (
                 <p>Sorry, no results were found.</p>
