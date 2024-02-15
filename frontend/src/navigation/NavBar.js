@@ -13,7 +13,7 @@ const NavBar = () => {
                     Jobly
                 </NavLink>
 
-                <Nav className="ml-auto" navbar>
+                <Nav className="page-options" navbar>
                     <NavLink to="/companies">
                         Companies
                     </NavLink>
