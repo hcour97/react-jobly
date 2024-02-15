@@ -1,45 +1,58 @@
 import React, { useState, useEffect } from "react";
 import JoblyApi from "../api/api";
+import SearchForm from "../common/SearchForm";
 
 /** Display a list of all the companies, with a preview description of company. 
  *  
  * Routed at: /companies
+ * State: companies, setCompanies
  * 
 */
 
-const CompanyList = () => {
+function CompanyList() {
     console.debug("CompanyList");
+
     const [companies, setCompanies] = useState(null);
+    // console.log(companies, "how many comps?")
 
-    // useEffect to run above function when page loads
     useEffect(function getCompaniesOnMount() {
-        console.debug("useEffect", "getCompaniesOnMount", "showCompanies")
-        showCompanies();
-        // console.log(companies);
-    }, []) 
+        console.debug("CompanyList useEffect getCompaniesOnMount");
+        search();
+        // console.log("how many comps after useEffect:", companies);
+    }, []);
+    // console.log(companies, "how many comps after UseEffect?")
 
-    // Function for API call and setCompanies()
-    async function showCompanies() {
-        console.debug("showCompanies", "ApiCall")
-        let res = await JoblyApi.getCompanies();
-        setCompanies(res);
-        console.log(companies);
+    /** Triggered when SearchForm submits, resets companies. */
+    async function search(name) {
+        // console.debug("search", "ApiCall")
+        let companies = await JoblyApi.getCompanies(name);
+        // console.log("the result is:", companies)
+        setCompanies(companies);
+        // console.log(companies);
     }
+
+    // search(); // works when it is called outside of useEffect()
+    //console.log(companies, "how many comps after search function????") // returning null
 
     // add loading page/spinner
         
     return (
-        <div>
-            <h1>Welcome to CompanyList page. </h1>
-            {/* map the list of companies into <ul> and <li> components for now */}
-            <ul>
-                {companies.map(c => (
-                    <li>
-                        {c.name}
-                        <p>{c.description}</p>
-                    </li>
-                ))}
-            </ul>
+        <div className="CompanyList col-md-8 offset-md-2">
+            <SearchForm searchFor={search}/>
+            {companies.length ? (
+                <div className="companyList-cards">
+                    <ul>
+                        {companies.map(c => (
+                            <li>
+                                {c.name}
+                                <p>{c.description}</p>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ) : (
+                <p>Sorry, no results were found.</p>
+            )}
         </div>
     )
 }
