@@ -39,7 +39,7 @@ function CompanyList() {
     return (
         <div className="CompanyList col-md-8 offset-md-2">
             <SearchForm searchFor={search}/>
-            {companies.length ? (
+            {companies !== null ? (
                 <div className="companyList-cards">
                     <ul>
                         {companies.map(c => (
