@@ -5,6 +5,7 @@ import NavBar from "./navigation/NavBar";
 
 import Homepage from "./Homepage";
 import CompanyList from "./companies/CompanyList";
+import CompanyDetail from "./companies/CompanyDetail";
 import JobList from "./jobs/JobList";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Homepage />} />
           <Route exact path="/companies" element={<CompanyList />} />
+          <Route path="/companies/:handle" element={<CompanyDetail />} />
           <Route exact path="/jobs" element={<JobList />} />
         </Routes>
       </BrowserRouter>

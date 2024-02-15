@@ -2,3 +2,14 @@
     box-shadow: none;
     border-color: #ced4da;
   }
+  .SearchForm {
+    margin-top: 10px;
+  }
+
+  button {
+    background-color: #00bbf0;
+    border-radius: 5px;
+    border-color: #77c1d6;
+    color: white;
+    font-weight: bold;
+  }

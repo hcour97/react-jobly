@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import "./SearchForm.css";
+
 
 /** Search Form
  *  used on CompanyList and JobList to filter what appears.

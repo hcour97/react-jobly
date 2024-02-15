@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import JoblyApi from "../api/api";
+
 import SearchForm from "../common/SearchForm";
+import LoadingPage from "../common/LoadingPage";
 import CompanyCard from "./CompanyCard";
 
 /** Display a list of all the companies, with a preview description of company. 
@@ -14,28 +16,19 @@ function CompanyList() {
     console.debug("CompanyList");
 
     const [companies, setCompanies] = useState(null);
-    // console.log(companies, "how many comps?")
 
     useEffect(function getCompaniesOnMount() {
-        console.debug("CompanyList useEffect getCompaniesOnMount");
+        console.debug("CompanyList useEffect search");
         search();
-        // console.log("how many comps after useEffect:", companies);
     }, []);
-    // console.log(companies, "how many comps after UseEffect?")
 
     /** Triggered when SearchForm submits, resets companies. */
     async function search(name) {
-        // console.debug("search", "ApiCall")
         let companies = await JoblyApi.getCompanies(name);
-        // console.log("the result is:", companies)
         setCompanies(companies);
-        // console.log(companies);
     }
 
-    // search(); // works when it is called outside of useEffect()
-    //console.log(companies, "how many comps after search function????") // returning null
-
-    // add loading page/spinner
+    if (!companies) return <LoadingPage />
         
     return (
         <div className="CompanyList col-md-8 offset-md-2">

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "./CompanyCard.css";
 
-/** Show a preview of information for the company.
+/** Display a preview of information for the company.
  * 
  * Props: handle, name, description, logoUrl
  * 
@@ -18,9 +18,9 @@ function CompanyCard({ handle, name, description, logoUrl }) {
             <div className="company-info">
                 <h5 className="company-title">
                     {name}
-                    {logoUrl && <img src={logoUrl}
+                    {/* {logoUrl && <img src={logoUrl}
                                      alt={name}
-                                     className="float-right-ml-5" />}
+                                     className="float-right-ml-5" />} */}
                 </h5>
                 <p><small>{description}</small></p>
             </div>
