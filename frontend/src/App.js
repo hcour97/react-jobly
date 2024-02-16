@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import './App.css';
 import NavBar from "./navigation/NavBar";
 import JoblyApi from "./api/api";
 import Paths from "./navigation/Paths";
-
+import useLocalStorage from "./hooks/useLocalStorage";
+import jwt from "jsonwebtoken";
 
 
 // Key name for storing token in localStorage for "remember me" re-login
-// export const TOKEN_STORAGE_ID = "jobly-token";
+export const TOKEN_STORAGE_ID = "jobly-token";
 
 /** Jobly application.
  *
@@ -31,6 +32,36 @@ function App() {
   const [infoLoaded, setInfoLoaded] = useState(false);
 
   console.debug("App", "infoLoaded=", infoLoaded, "currentUser=", currentUser, "token=", token);
+
+  // Load user info from API. Until a user is logged in and they have a token,
+  // this should not run. It only needs to re-run when a user logs out, so
+  // the value of the token is a dependency for this effect.
+
+  useEffect(function loadUserInfo() {
+    console.debug("App useEffect loadUserInfo", "token=", token);
+
+    async function getCurrentUser() {
+      if (token) {
+        try {
+          let { username } = jwt.decode(token);
+          // put the token on the API class to be used when you call the API
+          JoblyApi.token = token;
+          let currentUser = await JoblyApi.getCurrentUser(username); 
+          setCurrentUser(currentUser);
+          //setApplicationIds(new Set(currentUser.applications));
+        } catch (err) {
+          console.error("App loadUserInfo: problem loading", err);
+          setCurrentUser(null);
+        }
+      }
+      setInfoLoaded(true);
+    }
+    // set infoLoaded to false while async getCurrentUser runs; once the
+    // data is fetched (or even if an error happens!), this will be set back
+    // to false to control the spinner.
+    setInfoLoaded(false);
+    getCurrentUser();
+  }, [token]);
 
 /** Handles signup for app.
  * Automatic login, when signup form is submitted.
