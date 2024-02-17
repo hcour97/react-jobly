@@ -21,7 +21,7 @@ export const TOKEN_STORAGE_ID = "jobly-token";
  *
  * - token: for logged in users, this is their authentication JWT.
  *   Is required to be set for most API calls. This is initially read from
- *   localStorage and synced to there via the useLocalStorage hook.
+ *   localStorage and synced to there via the useLocalStorage hook..
  *
  * App -> Routes
  */
