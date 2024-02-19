@@ -6,6 +6,7 @@ import JoblyApi from "./api/api";
 import Paths from "./navigation/Paths";
 import useLocalStorage from "./hooks/useLocalStorage";
 import jwt from "jsonwebtoken";
+import UserContext from "./auth/UserContext";
 
 
 // Key name for storing token in localStorage for "remember me" re-login
@@ -96,12 +97,15 @@ function logout() {
 }
 
   return (
-    <div className="App">
+    
       <BrowserRouter>
-        <NavBar />
-        <Paths login={login} signup={signup} />
+        <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+          <div className="App">
+            <NavBar logout={logout}/>
+            <Paths login={login} signup={signup} />
+          </div>
+        </UserContext.Provider>
       </BrowserRouter>
-    </div>
   );
 }
 

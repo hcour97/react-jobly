@@ -23,6 +23,7 @@ const CompanyDetail = () => {
     useEffect(function getCompanyOnMount() {
         console.debug("getCompanyOnMount, getCompanyInfo")
         getCompanyInfo();
+
     }, [handle]);
 
     // function to make api call to get company info

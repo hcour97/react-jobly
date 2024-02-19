@@ -23,8 +23,16 @@ const Homepage = () => {
                     </h2>
                     : (
                         <p>
-                            <Link className="btn btn-primary font-weight-bold mr-3" to="/login">Login</Link>
-                            <Link className="btn btn-primary font-weight-bold mr-3" to="/signup">Sign Up</Link>
+                            <Link className="btn btn-primary font-weight-bold mr-3" to="/login">
+                                <button>
+                                    Login
+                                </button>
+                            </Link>
+                            <Link className="btn btn-primary font-weight-bold mr-3" to="/signup">
+                                <button>
+                                    Sign Up
+                                </button>
+                            </Link>
                         </p>
                     )}
             </div>

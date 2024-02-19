@@ -31,7 +31,7 @@ const Login = ({ login }) => {
         e.preventDefault(); // if the event does not get explicitly handled, the default action should not be taken 
         let result = await login(formData);
         if (result.success) {
-            navigate("/companies");
+            navigate("/");
         } else {
             setFormErrors(result.errors);
         }
