@@ -7,6 +7,7 @@ import Paths from "./navigation/Paths";
 import useLocalStorage from "./hooks/useLocalStorage";
 import jwt from "jsonwebtoken";
 import UserContext from "./auth/UserContext";
+import LoadingPage from "./common/LoadingPage";
 
 // Key name for storing token in localStorage for "remember me" re-login
 export const TOKEN_STORAGE_ID = "jobly-token";
@@ -30,6 +31,7 @@ function App() {
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
   const [currentUser, setCurrentUser] = useState(null);
   const [infoLoaded, setInfoLoaded] = useState(false);
+  const [applicationIds, setApplicationIds] = useState(new Set([]));
 
   console.debug("App", "infoLoaded=", infoLoaded, "currentUser=", currentUser, "token=", token);
 
@@ -95,10 +97,23 @@ function logout() {
   setToken(null);
 }
 
+/** checks to see if a job has been applied to */
+function hasAppliedToJob(id) {
+  return applicationIds.has(id);
+}
+
+/** API Call to apply for a job, also updates set of application ids. */
+function applyToJob(id) {
+  if (hasAppliedToJob(id)) return;
+  JoblyApi.applyToJob(currentUser.username, id);
+  setApplicationIds(new Set([...applicationIds, id]));
+}
+
+if (!infoLoaded) return <LoadingPage />
+
   return (
-    
       <BrowserRouter>
-        <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+        <UserContext.Provider value={{ currentUser, setCurrentUser, hasAppliedToJob, applyToJob }}>
           <div className="App">
             <NavBar logout={logout}/>
             <Paths login={login} signup={signup} />

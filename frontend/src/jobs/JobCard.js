@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { useState, useContext, useEffect } from "react";
+import UserContext from "../auth/UserContext";
 import "./JobCard.css"
 
 /** Display a preview of information about a job 
@@ -12,18 +12,41 @@ import "./JobCard.css"
 function JobCard({ key, id, title, salary, equity, companyName }) {
     console.debug(JobCard);
 
+    const { hasAppliedToJob, applyToJob } = useContext(UserContext);
+    const [ applied, setApplied ] = useState();
+
+    useEffect(function applicationStatus() {
+        console.debug("JobCard useEffect updateAppliedStatus", "id=", id);
+
+        setApplied(hasAppliedToJob(id));
+    }, [id, hasAppliedToJob]);
+
+    async function handleClick(e) {
+        if (hasAppliedToJob(id)) return;
+        applyToJob(id);
+        setApplied(true);
+    }
+
 
     return (
-        <div className="JobCard card">
+        <div className="JobCard card"> {applied}
         <div className="card-body">
           <h3 className="card-title">{title}</h3>
           <p>{companyName}</p>
           {salary && <div><small>Salary: $ {addCommas(salary)}</small></div>}
           {equity !== null && <div><small>Equity: {equity}</small></div>}
+          <button className="btn btn-danger font-weight-bold"
+                  onClick={handleClick}
+                  disabled={applied}>
+            {applied ? "Applied" : "Apply"}
+          </button>
         </div>
       </div>
-    )
+    );
 
+
+
+/** Format Salary with dollar sign and appropriate commas. */
     function addCommas(num) {
       let numString = num.toString();
       if (numString[0] === "-") {
