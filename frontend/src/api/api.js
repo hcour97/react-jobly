@@ -50,9 +50,15 @@ class JoblyApi {
   }
 
 /** Login to site */ 
-static async login(loginData) {
-  let res = await this.request(`auth/token`, loginData, "post");
+static async login(data) {
+  let res = await this.request(`auth/token`, data, "post");
   return res.token;
+}
+
+/** Update User Profile. */
+static async saveProfile(username, profileData) {
+  let res = await this.request(`users/${username}`, profileData, "patch");
+  return res.user;
 }
 
   /** Get a list of all companies. */

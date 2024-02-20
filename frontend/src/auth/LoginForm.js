@@ -28,12 +28,15 @@ const Login = ({ login }) => {
      *  Redirect to "/companies", if successful
      */
     async function handleSubmit(e) {
-        e.preventDefault(); // if the event does not get explicitly handled, the default action should not be taken 
+        e.preventDefault();  
         let result = await login(formData);
+        console.log("login result:", result)
         if (result.success) {
-            navigate("/");
+            console.log("Navigating to /companies...")
+            navigate("/companies");
+            console.log("current URL:", window.location.pathname); // current url
         } else {
-            setFormErrors(result.errors);
+            setFormErrors(result.errs);
         }
     }
 

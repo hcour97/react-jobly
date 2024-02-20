@@ -8,7 +8,6 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import jwt from "jsonwebtoken";
 import UserContext from "./auth/UserContext";
 
-
 // Key name for storing token in localStorage for "remember me" re-login
 export const TOKEN_STORAGE_ID = "jobly-token";
 
@@ -79,9 +78,9 @@ async function signup(signupData) {
 }
 
 /** Handles login. */
-async function login(loginData) {
+async function login(data) {
   try {
-    let token = await JoblyApi.login(loginData);
+    let token = await JoblyApi.login(data);
     setToken(token);
     return { success: true };
   } catch (errs) {

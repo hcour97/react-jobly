@@ -34,7 +34,7 @@ const SignupForm = ({ signup }) => {
         e.preventDefault(); // if the event does not get explicitly handled, the default action should not be taken 
         let result = await signup(formData);
         if (result.success) {
-            navigate("/");
+            navigate("/companies");
         } else {
             setFormErrors(result.errors);
         }

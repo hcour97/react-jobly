@@ -24,11 +24,15 @@ const NavBar = ({ logout }) => {
                 </NavLink>
 
                 <NavLink className="nav-link" to="/jobs">
-                    Jobs
+                    Jobs |
+                </NavLink>
+
+                <NavLink className="nav-link" to="/profile">
+                    <small>Edit profile</small>
                 </NavLink>
 
                 <Link className="nav-link" to="/" onClick={logout}>
-                        Logout { currentUser.first_name || currentUser.username }
+                        <small>Logout { currentUser.first_name }</small>
                 </Link>
             </Nav>
         );
