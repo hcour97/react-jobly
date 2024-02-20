@@ -83,9 +83,5 @@ static async saveProfile(username, profileData) {
   static async applyToJob(username, jobId) {
     let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "post");
   }
-
-  
 }
-
-
     export default JoblyApi;
