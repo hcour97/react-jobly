@@ -3,6 +3,8 @@ import JoblyApi from "../api/api";
 import UserContext from "../auth/UserContext";
 import Alert from "../common/Alert";
 
+import "./ProfileEditForm.css";
+
 /** Display profile edit form for the current logged-in user to edit their profile.
  *  
  * Routed at: /profile
@@ -69,15 +71,14 @@ function ProfileEditForm() {
 
     // return a form 
     return (
-        <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+        <div className="profile-edit-form">
             <h1>Edit Profile</h1>
             <form>
                 <div>
-                    <label htmlFor="username">Username</label>
-                    <p className="form-control-plaintext">{formData.username}</p>
+                    <label htmlFor="username">Username: {formData.username}</label>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="firstName">First Name</label>
+                    <label htmlFor="firstName">First Name:</label>
                     <input name="firstName"
                            className="form-control"
                            value={formData.firstName}
@@ -85,7 +86,7 @@ function ProfileEditForm() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="lastName">First Name</label>
+                    <label htmlFor="lastName">Last Name:</label>
                     <input name="lastName"
                            className="form-control"
                            value={formData.lastName}
@@ -93,7 +94,7 @@ function ProfileEditForm() {
                     />
                 </div>
                 <div>
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">Email:</label>
                     <input name="email"
                            className="form-control"
                            value={formData.email}
@@ -101,7 +102,7 @@ function ProfileEditForm() {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Confirm password to make changes:</label>
+                    <label>Confirm Password:</label>
                     <input name="password"
                            className="form-control"
                            type="password"
@@ -115,7 +116,7 @@ function ProfileEditForm() {
                     : null
                 }
 
-                <button className="btn btn-primary btn-block mt-4"
+                <button className="save-btn"
                         onClick={handleSubmit}>
                     Save Changes
                 </button>

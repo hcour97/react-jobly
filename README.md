@@ -7,7 +7,6 @@ Jobly is a mock job application site, where users register, view companies, job 
 * Express
 * Bootstrap
 
-
 # Getting Started
 ### `npm install` dependencies
 

@@ -35,7 +35,7 @@ function JobCard({ key, id, title, salary, equity, companyName }) {
           <p>{companyName}</p>
           {salary && <div><small>Salary: $ {addCommas(salary)}</small></div>}
           {equity !== null && <div><small>Equity: {equity}</small></div>}
-          <button className="btn btn-danger font-weight-bold"
+          <button className="apply-btn"
                   onClick={handleClick}
                   disabled={applied}>
             {applied ? "Applied" : "Apply"}
