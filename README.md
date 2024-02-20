@@ -3,9 +3,9 @@ This project was designed with Express backend and React frontend as part of a S
 Jobly is a mock job application site, where users register, view companies, job postings and keep track of jobs they have applied to. 
 
 ### Built With
-* [![React][React.js]][React-url]
-* [![Express][Express]][Express-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+* React.js
+* Express
+* Bootstrap
 
 
 # Getting Started
