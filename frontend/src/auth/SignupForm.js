@@ -36,7 +36,7 @@ const SignupForm = ({ signup }) => {
         if (result.success) {
             navigate("/companies");
         } else {
-            setFormErrors(result.errors);
+            setFormErrors(result.errs);
         }
     }
 
