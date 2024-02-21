@@ -24,5 +24,6 @@ Runs the backend data in development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view the JSON in your browser.
 
 ### Deployment
-Deployment Link coming soon!
+View the deployed app here:
+(https://jobly-frontend-lw3n.onrender.com/)
 
