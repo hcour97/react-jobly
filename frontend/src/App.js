@@ -5,7 +5,7 @@ import NavBar from "./navigation/NavBar";
 import JoblyApi from "./api/api";
 import Paths from "./navigation/Paths";
 import useLocalStorage from "./hooks/useLocalStorage";
-import jwt from "jsonwebtoken";
+import { jwtDecode } from "jwt-decode";
 import UserContext from "./auth/UserContext";
 import LoadingPage from "./common/LoadingPage";
 
@@ -45,7 +45,7 @@ function App() {
     async function getCurrentUser() {
       if (token) {
         try {
-          let { username } = jwt.decode(token);
+          let { username } = jwtDecode(token);
           // put the token on the API class to be used when you call the API
           JoblyApi.token = token;
           let currentUser = await JoblyApi.getCurrentUser(username); 
